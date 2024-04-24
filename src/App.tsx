@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./components/layout/Root";
+import HomePage from "./components/pages/HomePage";
+import OffresPage from "./components/pages/OffresPage";
+import LoginPage from "./components/pages/LoginPage";
+import ErrorPage from "./components/pages/ErrorPage";
+import NavBarJO from "./components/layout/NavBarJO";
+import FooterJO from "./components/layout/FooterJO";
+import MarketPage from "./components/pages/MarketPage";
 
-function App() {
-  const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "ticket",
+        element: <OffresPage />,
+      },
+      {
+        path: "market", 
+        element: <MarketPage />
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
+    ],
+  },
+]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App

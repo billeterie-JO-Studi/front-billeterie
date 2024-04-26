@@ -5,8 +5,6 @@ import HomePage from "./components/pages/HomePage";
 import OffresPage from "./components/pages/OffresPage";
 import LoginPage from "./components/pages/LoginPage";
 import ErrorPage from "./components/pages/ErrorPage";
-import NavBarJO from "./components/layout/NavBarJO";
-import FooterJO from "./components/layout/FooterJO";
 import MarketPage from "./components/pages/MarketPage";
 
 const router = createBrowserRouter([

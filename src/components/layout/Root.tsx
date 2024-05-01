@@ -1,13 +1,16 @@
 import { Outlet } from "react-router-dom";
-import NavBarJO from "./NavBarJO";
-import FooterJO from "./FooterJO";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
+import './Root.css'
 
 export default function Root() {
   return (
     <>
-      <NavBarJO />
-      <Outlet />
-      <FooterJO />
+      <NavBar />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </>
   );
 }

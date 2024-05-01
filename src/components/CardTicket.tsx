@@ -1,6 +1,6 @@
 import { Button, Card, Form } from "react-bootstrap";
 import Offre from "../models/Offre";
-
+import "./CardTicket.css"
 type Props = {
   offre: Offre;
 }
@@ -15,8 +15,8 @@ export default function CardTicket(props: Readonly<Props>) {
   }
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={`https://loremflickr.com/100/100/stadium,ticket?random=${offre.id}`} />
+    <Card>
+      <Card.Img variant="top" src={`https://loremflickr.com/500/500/stadium,ticket?random=${offre.id}`} />
       <Card.Body>
         <Card.Title>{offre.name}</Card.Title>
         <Card.Text>
@@ -25,8 +25,8 @@ export default function CardTicket(props: Readonly<Props>) {
         <span><strong>Prix Unitaire :</strong> {`${offre.price.toString()} €`} </span>
         <hr />
         <Form.Label htmlFor="quantityTicket">Quantité de billet : </Form.Label>
-        <Form.Control type="number" size="sm" defaultValue={0} className="m-2" />
-        <Button variant="primary" onClick={addToCard}>Ajouter au panier </Button>
+        <Form.Control type="number" size="sm" defaultValue={0} className="mb-3" />
+        <Button variant="primary" onClick={addToCard} className= "w-100">Ajouter au panier </Button>
       </Card.Body>
     </Card>
   );

@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 export default function ErrorPage() {
   return (
     <>
-      <h1>Page non trouvé</h1>
-      <p>la page de vous rechercher n'existe pas </p>
-      <img src={imageFail} alt="meme chute plongeon" />
-      <hr />
+      <h1 className="h2 mb-4">Oupss... Page non trouvée !</h1>
+      <p className="mb-4 text-center">La page que vous recherchez n'existe pas.</p>
+      <img src={imageFail} alt="meme chute plongeon" className="w-100 mb-4"/>
       <Link to="/">
-        <Button variant="primary">Retour à l'accueil</Button>
+        <Button variant="primary w-100">Retour à l'accueil</Button>
       </Link>
     </>
   );

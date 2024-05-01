@@ -1,0 +1,4 @@
+.form-register {
+    width: clamp(20rem, 30vw, 42rem);
+    padding: 2.5rem;
+}

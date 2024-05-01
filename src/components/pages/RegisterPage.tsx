@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
+import "./RegisterPage.css";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -43,7 +44,7 @@ export default function LoginPage() {
       console.log(apiUrl);
 
       console.log(response.data.jwt);
-      setToken({ token: response.data.jwt, isConnected: true });
+      setToken({ token: response.data.jwt, isValid: true });
 
       // redirection vers la home
       navigate("/");
@@ -73,10 +74,26 @@ export default function LoginPage() {
   };
   return (
     <Container>
-      <Card className="form-signin">
-        <h1 className="h2 mb-4">Connexion</h1>
+      <Card className="form-register">
+        <h1 className="h2 mb-4">Inscription</h1>
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="inputEmail">Nom</Form.Label>
+            <Form.Control
+              type="text"
+              id="inputLastname"
+              onChange={onChangeIdentified}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="inputEmail">Prénom</Form.Label>
+            <Form.Control
+              type="text"
+              id="inputFirstname"
+              onChange={onChangeIdentified}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label htmlFor="inputEmail">Email</Form.Label>
             <Form.Control
               type="email"
@@ -92,11 +109,21 @@ export default function LoginPage() {
               onChange={onChangeIdentified}
             />
           </Form.Group>
+          <Form.Group className="mb-4">
+            <Form.Label htmlFor="inputPassword">
+              Confirmer le mot de passe
+            </Form.Label>
+            <Form.Control
+              type="password"
+              id="inputPassword2"
+              onChange={onChangePassword}
+            />
+          </Form.Group>
 
           <Button variant="primary" type="submit" className='w-100 d-flex justify-content-center align-items-center my-3'>
             {waitingResponse ? <Spinner size="sm" animation="border" as="span" role="status"  className="my-1"/> :
             <span>
-            Connexion
+            Enregistrer
             </span>
           }
           </Button>

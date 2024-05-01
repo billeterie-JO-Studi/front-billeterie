@@ -1,0 +1,17 @@
+nav{
+    background-color: #D5D9DD;
+}
+
+nav a:not(.navbar-brand){
+    color: rgb(78, 78, 78);
+    transition: all .3s ease-out;
+}
+nav a:not(.navbar-brand).active,
+nav a:not(.navbar-brand):hover{
+    color: rgb(0, 0, 0);
+}
+
+.navbar-brand img {
+    width: auto;
+    height: 2rem;
+}

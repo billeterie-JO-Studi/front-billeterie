@@ -6,6 +6,7 @@ import OffresPage from "./components/pages/OffresPage";
 import LoginPage from "./components/pages/LoginPage";
 import ErrorPage from "./components/pages/ErrorPage";
 import MarketPage from "./components/pages/MarketPage";
+import { RecoilRoot } from "recoil";
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,8 @@ const router = createBrowserRouter([
         element: <OffresPage />,
       },
       {
-        path: "market", 
-        element: <MarketPage />
+        path: "market",
+        element: <MarketPage />,
       },
       {
         path: "login",
@@ -37,5 +38,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <RecoilRoot>
+      <RouterProvider router={router} />;
+    </RecoilRoot>
+  );
 }

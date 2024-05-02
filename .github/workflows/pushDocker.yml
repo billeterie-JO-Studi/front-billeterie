@@ -1,4 +1,4 @@
-name: Analyse SonarCloud
+name: Push images vers le registry
 on:
   push:
     branches:
@@ -25,4 +25,4 @@ jobs:
         run: docker build -t ponche/studi-front .
 
       - name: Push de l'image vers DockerHub
-        run: docker pushponche/studi-front
+        run: docker push ponche/studi-front

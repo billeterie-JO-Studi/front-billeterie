@@ -6,7 +6,7 @@ test("deux plus deux font quatre", () => {
 });
 
 
-test("vérification la bonne conversiont API to state", () => {
+test("vérification la bonne conversion API to state", () => {
   const dataApi: OffreApi = {
     id: 42,
     attributes: {
@@ -26,7 +26,7 @@ test("vérification la bonne conversiont API to state", () => {
   })
 });
 
-test("vérification que l'erreur est lancé", () => {
+test("vérification fonction isOffre", () => {
   const dataApi: any = {
     id: "42",
     attributes: {
@@ -37,5 +37,34 @@ test("vérification que l'erreur est lancé", () => {
     },
   };
 
-  expect(OffreService.createOffreFromDataApi(dataApi)).toThrow("Erreur de type"); 
+  expect(OffreService.isOffre(dataApi)).toBe(false);
+  
+})
+test("vérification fonction isOffre", () => {
+  const dataApi: OffreApi = {
+    id: 42,
+    attributes: {
+      name: "Solo",
+      description: "Vive les célibataire",
+      price: 69,
+      nb_place: 1,
+    },
+  };
+
+  expect(OffreService.isOffre(dataApi)).toBe(true);
+  
+})
+
+test("vérification que l'erreur est lancé", () => {
+  const dataApi: any = {
+    id: "42",
+    attributes: {
+      name: "Solo",
+      description: "Vive les célibataire",
+      price: "69Dollars",
+      nb_place: 1,
+    },
+  };
+ 
+  expect(() => {OffreService.createOffreFromDataApi(dataApi)}).toThrow(Error); 
 })

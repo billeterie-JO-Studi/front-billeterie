@@ -1,10 +1,16 @@
 import { atom } from "recoil";
 
-import TokenJwt from "../models/TokenJwt";
+import User from "../models/User";
+import Offre from "../models/Offre";
 
-export const tokenJwtState = atom<TokenJwt>({
-  key: "tokenJwtState",
+export const userState = atom<User>({
+  key: "userState",
   default: {
-    isValid: false,
+    isConnected: false,
   },
 });
+
+export const offresState = atom<Offre[]>({
+  key: "offresState", 
+  default: []
+})

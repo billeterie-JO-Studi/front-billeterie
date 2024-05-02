@@ -16,5 +16,23 @@
     "name": "Family", 
     "description": "Ce billet permet d'avoir 4 places pour les JO",
     "price": 34
+  },
+  {
+    "id": 1,
+    "name": "Solo", 
+    "description": "Ce billet permet d'avoir accès au JO pour une personne",
+    "price": 10
+  }, 
+  {
+    "id": 2, 
+    "name": "Duo", 
+    "description": "Ce billet permet d'avoir 2 place pour les JO",
+    "price": 18
+  }, 
+  {
+    "id": 3, 
+    "name": "Family", 
+    "description": "Ce billet permet d'avoir 4 places pour les JO",
+    "price": 34
   }
 ]

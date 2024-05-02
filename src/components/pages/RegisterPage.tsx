@@ -97,7 +97,7 @@ export default function RegisterPage() {
 
   return (
     <Container>
-      <Card className="form-register">
+      <Card className="form-register mb-5">
         <h1 className="h2 mb-4">Inscription</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">

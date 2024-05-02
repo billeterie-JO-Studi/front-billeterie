@@ -1,4 +1,4 @@
-import { Container, Navbar} from "react-bootstrap";
+import { Container} from "react-bootstrap";
 import './Footer.css'
 
 export default function FooterJO() {

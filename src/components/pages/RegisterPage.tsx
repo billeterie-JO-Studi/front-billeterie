@@ -1,6 +1,6 @@
 import { Button, Card, Form, Spinner, Container } from "react-bootstrap";
 import "./LoginPage.css";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../store/store";
@@ -67,7 +67,7 @@ export default function LoginPage() {
     } catch (err) {
       console.log(`Erreur d'enregistrement : ${err}`);
       // TODO: donner plus d'important au client sur l'erreur. 
-      
+
     } finally {
       setWaitingResponse(false);
     }

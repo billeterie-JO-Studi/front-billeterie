@@ -27,6 +27,6 @@ export default class OffreService {
       };
       return newOffre;
     }
-    throw new Error("Erreur de type ");
+    throw new Error("Erreur de type");
   }
 }

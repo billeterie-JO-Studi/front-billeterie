@@ -68,7 +68,7 @@ export default function App() {
 
       setOffres(listOffre); 
     } catch (err) {
-      console.log(`erreur est : ${err}`);
+      console.log(err);
     }
   };
 

@@ -37,6 +37,11 @@ export default function LoginPage() {
     console.log("debut requete");
 
     try {
+
+      if (form.password !== form.checkPasswork) {
+        throw new Error("Les mots de passe doivent etre identique"); 
+      }
+
       const responseApi: any = await axios.post(
         `${apiUrl}/api/auth/local/register`,
         {

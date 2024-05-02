@@ -17,7 +17,7 @@ type FormRegister = {
   checkPasswork: string;
 };
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [waitingResponse, setWaitingResponse] = useState(false);
   const [form, setForm] = useState<FormRegister>({
     firstname: "",

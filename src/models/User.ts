@@ -1,6 +1,7 @@
 export default interface User {
+  id?: number; 
   username?: string; 
-  fistname?: string; 
+  firstname?: string; 
   lastname?: string; 
   email?: string; 
   isConfirmed?: boolean; 

@@ -16,7 +16,7 @@ type Login = {
 export default function LoginPage() {
   const [waitingResponse, setWaitingResponse] = useState(false);
   const [login, setLogin] = useState<Login>({ identifier: "", password: "" });
-  const setToken = useSetRecoilState(userState);
+  const setUser = useSetRecoilState(userState);
 
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
       console.log(apiUrl);
 
       console.log(response.data.jwt);
-      setToken({ token: response.data.jwt, isConnected: true });
+      setUser({ token: response.data.jwt, isConnected: true });
 
       // redirection vers la home
       navigate("/");
@@ -76,7 +76,7 @@ export default function LoginPage() {
       <Card className="form-signin">
         <h1 className="h2 mb-4">Connexion</h1>
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+          <Form.Group className="mb-3">
             <Form.Label htmlFor="inputEmail">Email</Form.Label>
             <Form.Control
               type="email"
@@ -93,12 +93,22 @@ export default function LoginPage() {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" className='w-100 d-flex justify-content-center align-items-center my-3'>
-            {waitingResponse ? <Spinner size="sm" animation="border" as="span" role="status"  className="my-1"/> :
-            <span>
-            Connexion
-            </span>
-          }
+          <Button
+            variant="primary"
+            type="submit"
+            className="w-100 d-flex justify-content-center align-items-center my-3"
+          >
+            {waitingResponse ? (
+              <Spinner
+                size="sm"
+                animation="border"
+                as="span"
+                role="status"
+                className="my-1"
+              />
+            ) : (
+              <span>Connexion</span>
+            )}
           </Button>
         </Form>
       </Card>

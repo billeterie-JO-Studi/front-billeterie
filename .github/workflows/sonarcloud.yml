@@ -1,4 +1,4 @@
-name: Build
+name: Push images
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
+  pushImage:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
@@ -25,12 +25,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Connexion à DockerHub
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-
-      - name: Build l'image Docker
-        run: docker build -t ponche/studi-front .
-
-      - name: Push de l'image vers DockerHub
-        run: docker pushponche/studi-front

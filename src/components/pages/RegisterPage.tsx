@@ -66,6 +66,8 @@ export default function LoginPage() {
       navigate("/");
     } catch (err) {
       console.log(`Erreur d'enregistrement : ${err}`);
+      // TODO: donner plus d'important au client sur l'erreur. 
+      
     } finally {
       setWaitingResponse(false);
     }

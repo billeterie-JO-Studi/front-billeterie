@@ -89,7 +89,7 @@ export default function LoginPage() {
             <Form.Control
               type="password"
               id="inputPassword1"
-              onChange={onChangeIdentified}
+              onChange={onChangePassword}
             />
           </Form.Group>
 

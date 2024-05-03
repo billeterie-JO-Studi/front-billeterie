@@ -1,7 +1,6 @@
 import { Button, Col, Row } from "react-bootstrap";
 import ItemMarket from "../models/ItemMarket";
-import { ChangeEvent } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState} from "recoil";
 import { marketState } from "../store/store";
 
 type Props = {

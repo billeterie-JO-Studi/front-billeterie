@@ -3,11 +3,11 @@ import CardTicket from "../CardTicket";
 import { useState } from "react";
 import Offre from "../../models/Offre";
 import { useRecoilValue } from "recoil";
-import { offresState } from "../../store/store";
+import { offresState, totalCommandSelector } from "../../store/store";
 // import offres from "../../mock/offres.json";
 
 export default function OffresPage() {
-  const [totalCommand] = useState(0);
+  const totalCommand = useRecoilValue(totalCommandSelector); 
   const offres = useRecoilValue(offresState);
 
   console.log(offres);

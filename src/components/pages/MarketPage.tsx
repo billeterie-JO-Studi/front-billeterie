@@ -1,12 +1,35 @@
-import { Col, Row, Button, Container, ListGroup } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { marketState, totalCommandSelector, totalTicketSelector } from "../../store/store";
+import { Col, Row, Container } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
+import {
+  marketState,
+  totalCommandSelector,
+  totalTicketSelector,
+} from "../../store/store";
 import ItemCardMarket from "../ItemMarket";
 import "./MarketPage.css";
+import axios from "axios";
+
+const urlApi = import.meta.env.VITE_API_URL;
+
 export default function MarketPage() {
-  const [listMarket, setListMarket] = useRecoilState(marketState);
+  const listMarket = useRecoilValue(marketState);
   const totalCommand = useRecoilValue(totalCommandSelector);
-  const totalTicket = useRecoilValue(totalTicketSelector); 
+  const totalTicket = useRecoilValue(totalTicketSelector);
+
+  const onClickPay = async () => {
+    try {
+      const dataApi = listMarket.map((item) => {
+        return { offre: item.offre.id, quantity: item.quantity };
+      });
+      const response = await axios.post(`${urlApi}/api/checkout`, dataApi);
+      console.log(response);
+
+      document.location = response.data;
+    } catch (err) {
+      console.error("Erreur dans la request API");
+      console.error(err);
+    }
+  };
 
   return (
     <Container>
@@ -34,12 +57,14 @@ export default function MarketPage() {
             <Row>
               <Col>
                 <p className="fw-bold">
-                  Nombre total de ticket : <span className="fw-normal">{totalTicket}</span>
+                  Nombre total de ticket :{" "}
+                  <span className="fw-normal">{totalTicket}</span>
                 </p>
               </Col>
               <Col>
                 <p className="fw-bold">
-                  Prix Total : <span className="fw-normal">{totalCommand}€</span>
+                  Prix Total :{" "}
+                  <span className="fw-normal">{totalCommand}€</span>
                 </p>
               </Col>
             </Row>
@@ -67,7 +92,7 @@ export default function MarketPage() {
                 </Col>
               </Col>
               <Col>
-                <button>Commander</button>
+                <button onClick={onClickPay}>Commander</button>
               </Col>
             </Row>
           </Col>

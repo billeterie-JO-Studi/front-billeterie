@@ -1,11 +1,11 @@
-name: Analyse SonarCloud
+name: Push image docker
 on:
   push:
     branches:
       - main
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  pushDocker:
+    name: Push image docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
       - name: Build l'image Docker
-        run: docker build -t ponche/studi-front .
+        run: docker build --build-arg API_URL=${{ variableGithub }} -t ponche/studi-front .
 
       - name: Push de l'image vers DockerHub
-        run: docker pushponche/studi-front
+        run: docker push ponche/studi-front

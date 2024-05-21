@@ -13,7 +13,6 @@ import { useEffect } from "react";
 import Offre from "./models/Offre";
 import OffreService from "./services/OffresService";
 import { offresState } from "./store/store";
-import PayementPage from "./components/pages/PayementPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
 
@@ -43,10 +42,6 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterPage />,
-      },
-      {
-        path: "payement", 
-        element: <PayementPage/>
       },
       {
         path: "profile", 

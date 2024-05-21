@@ -1,7 +1,7 @@
 import { Button, Card, Form } from "react-bootstrap";
 import Offre from "../models/Offre";
 import "./CardTicket.css";
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { marketState } from "../store/store";
 import ItemMarket from "../models/ItemMarket";
@@ -32,10 +32,10 @@ export default function CardTicket(props: Readonly<Props>) {
     );
     if (indexItem === -1) {
       // item n'existe pas dans le panier
-      console.log("item n'existe pas"); 
+      console.log("item n'existe pas");
       setListMarket([...listMarket, itemMarket]);
     } else {
-      console.log("item existe"); 
+      console.log("item existe");
       const newListItem = listMarket.map((item) =>
         item.offre.id === itemMarket.offre.id ? itemMarket : item
       );
@@ -45,17 +45,15 @@ export default function CardTicket(props: Readonly<Props>) {
     console.log(listMarket);
 
     // TODO: informé le client avec un toast ou autres.
-
   };
 
   const onChangeQuantity = (event: ChangeEvent<HTMLInputElement>) => {
     const newQuantity = Number.parseInt(event.target.value);
-    
+
     if (Number.isNaN(newQuantity) || newQuantity < 0) {
       setIsInvalid(true);
       return;
     }
-   
 
     setIsInvalid(false);
     setQuantity(newQuantity);

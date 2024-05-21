@@ -1,27 +1,6 @@
-import QRCode from "qrcode-generator";
-import { jsPDF } from "jspdf";
-import { Button } from "react-bootstrap";
 import "./PurchaseHistoryPage.css";
 
 export default function PurchaseHistoryPage() {
-  const testDev = () => {
-    const doc = new jsPDF();
-
-    doc.html(document.body); 
-
-    // Génération du QrCode
-    const typeNumber = 4;
-    const errorCorrectionLevel = "L"; // Liveau de correction d'erreur
-    const qr = QRCode(typeNumber, errorCorrectionLevel);
-    qr.addData("Mon super billet");
-    qr.make();
-
-    const qrImageData = qr.createDataURL();
-
-    doc.addImage(qrImageData, "PNG", 15, 40, 50, 50);
-
-    doc.save("a4.pdf");
-  };
 
   return (
     <>

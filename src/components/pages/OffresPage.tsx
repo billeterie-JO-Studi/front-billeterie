@@ -1,22 +1,20 @@
 import { Button, Container, Row, Col } from "react-bootstrap";
 import CardTicket from "../CardTicket";
-import { useState } from "react";
 import Offre from "../../models/Offre";
 import { useRecoilValue } from "recoil";
 import { offresState, totalCommandSelector } from "../../store/store";
-import { useNavigate, useNavigation } from "react-router-dom";
-// import offres from "../../mock/offres.json";
+import { useNavigate } from "react-router-dom";
 
 export default function OffresPage() {
-  const totalCommand = useRecoilValue(totalCommandSelector); 
+  const totalCommand = useRecoilValue(totalCommandSelector);
   const offres = useRecoilValue(offresState);
 
-  // navigation 
-  const navigate = useNavigate(); 
+  // navigation
+  const navigate = useNavigate();
 
   const onClickCommand = () => {
-    navigate("/market"); 
-  }
+    navigate("/market");
+  };
 
   console.log(offres);
 
@@ -41,7 +39,12 @@ export default function OffresPage() {
           <strong>Total commande : {totalCommand.toString()} €</strong>
         </Col>
         <Col md={{ offset: 10 }}>
-          <Button className="justify-content-end w-100" onClick={onClickCommand}>Commander</Button>
+          <Button
+            className="justify-content-end w-100"
+            onClick={onClickCommand}
+          >
+            Commander
+          </Button>
         </Col>
       </Row>
     </Container>

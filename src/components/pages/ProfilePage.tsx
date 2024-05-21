@@ -1,6 +1,5 @@
 import QRCode from "qrcode-generator";
 import { jsPDF } from "jspdf";
-import { Button } from "react-bootstrap";
 import "./ProfilePage.css";
 
 export default function ProfilePage() {
@@ -59,7 +58,7 @@ export default function ProfilePage() {
               <td>Ticket Duo</td>
               <td>Ticket permettant l'entrée à 2 évenemements</td>
               <td>
-                <button className="btn btn-sm btn-dark">Lien</button>
+                <button className="btn btn-sm btn-dark" onClick={testDev}>Lien</button>
               </td>
               <td>36 €</td>
               <td>2</td>

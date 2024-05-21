@@ -49,14 +49,13 @@ export default function CardTicket(props: Readonly<Props>) {
   };
 
   const onChangeQuantity = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("valeur changé");
     const newQuantity = Number.parseInt(event.target.value);
-    console.log(newQuantity);
-    console.log(isNaN(newQuantity));
-    if (Number.isNaN(newQuantity)) {
+    
+    if (Number.isNaN(newQuantity) || newQuantity < 0) {
       setIsInvalid(true);
       return;
     }
+   
 
     setIsInvalid(false);
     setQuantity(newQuantity);

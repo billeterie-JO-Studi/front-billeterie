@@ -3,12 +3,20 @@ import CardTicket from "../CardTicket";
 import { useState } from "react";
 import Offre from "../../models/Offre";
 import { useRecoilValue } from "recoil";
-import { offresState } from "../../store/store";
+import { offresState, totalCommandSelector } from "../../store/store";
+import { useNavigate, useNavigation } from "react-router-dom";
 // import offres from "../../mock/offres.json";
 
 export default function OffresPage() {
-  const [totalCommand] = useState(0);
+  const totalCommand = useRecoilValue(totalCommandSelector); 
   const offres = useRecoilValue(offresState);
+
+  // navigation 
+  const navigate = useNavigate(); 
+
+  const onClickCommand = () => {
+    navigate("/market"); 
+  }
 
   console.log(offres);
 
@@ -33,7 +41,7 @@ export default function OffresPage() {
           <strong>Total commande : {totalCommand.toString()} €</strong>
         </Col>
         <Col md={{ offset: 10 }}>
-          <Button className="justify-content-end w-100">Commander</Button>
+          <Button className="justify-content-end w-100" onClick={onClickCommand}>Commander</Button>
         </Col>
       </Row>
     </Container>

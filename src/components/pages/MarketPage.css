@@ -1,0 +1,13 @@
+section{
+    width: clamp(18rem, 70vw, 78rem);
+    padding-inline: 1rem;
+    margin-bottom: 4rem;
+}
+
+.input-qty{
+    width: 2rem;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border: none;
+}

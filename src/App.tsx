@@ -13,6 +13,9 @@ import { useEffect } from "react";
 import Offre from "./models/Offre";
 import OffreService from "./services/OffresService";
 import { offresState } from "./store/store";
+import PayementPage from "./components/pages/PayementPage";
+import ProfilePage from "./components/pages/ProfilePage";
+import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -42,6 +45,18 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
+        path: "payement", 
+        element: <PayementPage/>
+      },
+      {
+        path: "profile", 
+        element: <ProfilePage />
+      },
+      {
+        path: "purchase-history", 
+        element: <PurchaseHistoryPage />
+      },
+      {
         path: "*",
         element: <ErrorPage />,
       },
@@ -59,6 +74,7 @@ export default function App() {
       const response = await axios.get(`${urlApi}/api/offres`);
       console.log(response);
       const listData: unknown[] = response.data.data;
+      
 
       const listOffre: Offre[] = [];
       listData.forEach((data) => {

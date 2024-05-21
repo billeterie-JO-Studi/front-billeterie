@@ -1,0 +1,4 @@
+.table{
+  width: clamp(20rem, 75vw + 1rem, 55rem) ;
+  background-color: red;
+}

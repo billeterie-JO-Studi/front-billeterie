@@ -4,6 +4,7 @@ import {
   marketState,
   totalCommandSelector,
   totalTicketSelector,
+  userState,
 } from "../../store/store";
 import ItemCardMarket from "../ItemMarket";
 import "./MarketPage.css";
@@ -15,13 +16,20 @@ export default function MarketPage() {
   const listMarket = useRecoilValue(marketState);
   const totalCommand = useRecoilValue(totalCommandSelector);
   const totalTicket = useRecoilValue(totalTicketSelector);
+  const user = useRecoilValue(userState);
 
   const onClickPay = async () => {
+    // logs 
+    console.log(user.token); 
     try {
       const dataApi = listMarket.map((item) => {
         return { offre: item.offre.id, quantity: item.quantity };
       });
-      const response = await axios.post(`${urlApi}/api/checkout`, dataApi);
+      const response = await axios.post(`${urlApi}/api/checkout`, dataApi, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       console.log(response);
 
       document.location = response.data;

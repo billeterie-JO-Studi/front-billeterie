@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  pushImage:
+  sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:

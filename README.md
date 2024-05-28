@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+# Application front billeterie
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+cette application est le front de l'application billeterie
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Méthode manuel
 
-## Expanding the ESLint configuration
+**Prérequis** : [NodeJs](https://nodejs.org/en/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. crée le fichier `.env` en utilisant le fichier `.env.example`
+2. modifier la variable de l'adresse API dans le .env pour qui correspond à l'adresse API réel.
+3. installer les dépendance: `npm install`
+4. lancer le build avec la commande `npm run build`
+5. recupéré le dossier dist et faire le service par un serveur web ( Nginx, apache )
 
-- Configure the top-level `parserOptions` property like this:
+**Remarque**: configurer votre serveur web pour qui charge toujours le fichier index.html ( _SPA_ )
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### installation Avec Docker
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+**Prérequie** : [Docker engine](https://docs.docker.com/engine/install/)
+
+1. lancer la commande `docker build --build-arg API_URL="https://api.example.com" -t ma-billeterie .`
+2. pour lancer l'image : `docker run -dp 80:8080 ma-billeterie`
+
+**remarque**: changer par la bonne adress api dans l'argument API_URL.
+API_URL ne peut pas etre changé après le build. si besoin de changer, rebuilder une nouvelle image.
+
+l'image expose le port 8080 pour le serveur web.

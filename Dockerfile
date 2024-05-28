@@ -15,5 +15,6 @@ LABEL version="0.1"
 LABEL description="Front de api billeterie jeu Olympique"
 
 COPY --from=build dist /usr/share/nginx/html
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080

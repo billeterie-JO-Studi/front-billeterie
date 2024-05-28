@@ -34,12 +34,9 @@ export default function RegisterPage() {
 
     setWaitingResponse(true);
 
-    console.log("debut requete");
-
     try {
-
       if (form.password !== form.checkPasswork) {
-        throw new Error("Les mots de passe doivent etre identique"); 
+        throw new Error("Les mots de passe doivent etre identique");
       }
 
       const responseApi: any = await axios.post(
@@ -66,8 +63,7 @@ export default function RegisterPage() {
       navigate("/");
     } catch (err) {
       console.log(`Erreur d'enregistrement : ${err}`);
-      // TODO: donner plus d'important au client sur l'erreur. 
-
+      // TODO: donner plus d'important au client sur l'erreur.
     } finally {
       setWaitingResponse(false);
     }
@@ -91,8 +87,6 @@ export default function RegisterPage() {
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, password: e.target.value });
-
-    console.log(e);
   };
 
   return (

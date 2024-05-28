@@ -19,8 +19,7 @@ export default function MarketPage() {
   const user = useRecoilValue(userState);
 
   const onClickPay = async () => {
-    // logs 
-    console.log(user.token); 
+    // logs
     try {
       const dataApi = listMarket.map((item) => {
         return { offre: item.offre.id, quantity: item.quantity };
@@ -30,12 +29,10 @@ export default function MarketPage() {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      console.log(response);
 
       document.location = response.data;
     } catch (err) {
-      console.error("Erreur dans la request API");
-      console.error(err);
+      //TODO: faire le traitement d'erreur en cas d'erreur
     }
   };
 

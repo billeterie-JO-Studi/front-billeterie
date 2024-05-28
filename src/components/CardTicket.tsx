@@ -32,17 +32,13 @@ export default function CardTicket(props: Readonly<Props>) {
     );
     if (indexItem === -1) {
       // item n'existe pas dans le panier
-      console.log("item n'existe pas");
       setListMarket([...listMarket, itemMarket]);
     } else {
-      console.log("item existe");
       const newListItem = listMarket.map((item) =>
         item.offre.id === itemMarket.offre.id ? itemMarket : item
       );
       setListMarket(newListItem);
     }
-
-    console.log(listMarket);
 
     // TODO: informé le client avec un toast ou autres.
   };

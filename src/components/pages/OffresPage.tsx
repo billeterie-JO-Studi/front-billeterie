@@ -16,8 +16,6 @@ export default function OffresPage() {
     navigate("/market");
   };
 
-  console.log(offres);
-
   return (
     <Container fluid={false} className="mb-5">
       <h1 className="h2 mb-5">Nos Billets</h1>

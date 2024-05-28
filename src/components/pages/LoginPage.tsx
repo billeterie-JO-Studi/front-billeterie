@@ -1,6 +1,6 @@
 import { Button, Card, Form, Spinner, Container } from "react-bootstrap";
 import "./LoginPage.css";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../store/store";
@@ -20,29 +20,19 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(apiUrl);
-  }, []);
-
   const handleSubmit = async (event: FormEvent) => {
     // on arrete le comportemente par défaut
     event.preventDefault();
 
     setWaitingResponse(true);
 
-    console.log("debut requete");
-
     // demande API
     try {
-      console.log(login);
       const response: any = await axios.post(`${apiUrl}/api/auth/local`, {
         identifier: login.identifier,
         password: login.password,
       });
 
-      console.log(apiUrl);
-
-      console.log(response.data.jwt);
       setUser({ token: response.data.jwt, isConnected: true });
 
       // redirection vers la home
@@ -58,15 +48,12 @@ export default function LoginPage() {
 
   const onChangeIdentified = (e: ChangeEvent<HTMLInputElement>) => {
     // TODO: vérification si c'est un adresse email.
-    console.log(e);
 
     setLogin({ ...login, identifier: e.target.value });
   };
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     // TODO: controle de la force du mot de passe.
-
-    console.log(e);
 
     // mise a jour du state local
     setLogin({ ...login, password: e.target.value });

@@ -8,14 +8,12 @@ import LoginPage from "./components/pages/LoginPage";
 import MarketPage from "./components/pages/MarketPage";
 import OffresPage from "./components/pages/OffresPage";
 import RegisterPage from "./components/pages/RegisterPage";
-// import { userState } from "./store/store";
 import { useEffect, useRef } from "react";
 import ProfilePage from "./components/pages/ProfilePage";
 import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
 import useLoad from "./hooks/useLoad";
 import { marketState } from "./store/store";
 
-// const setUser = useSetRecoilState(userState);
 
 const router = createBrowserRouter([
   {
@@ -61,7 +59,7 @@ const router = createBrowserRouter([
 export default function App() {
   const isLoaded = useRef(false);
   const panier = useRecoilValue(marketState);
-  const { loadOffre, loadPanier } = useLoad();
+  const { loadOffre, loadPanier, loadUser } = useLoad();
 
   useEffect(() => {
     console.log("use Effect sauvegarde panier");
@@ -75,10 +73,11 @@ export default function App() {
 
   const init = async () => {
     if (isLoaded.current) return;
-    // récupération des offres
+
     const listPromiseLoader = [];
     listPromiseLoader.push(loadOffre());
     listPromiseLoader.push(loadPanier());
+    listPromiseLoader.push(loadUser());
 
     await Promise.all(listPromiseLoader);
 

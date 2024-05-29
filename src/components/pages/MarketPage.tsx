@@ -84,14 +84,6 @@ export default function MarketPage() {
                   <p>{totalTicket}</p>
                 </Col>
                 <Col className="d-flex justify-content-between">
-                  <p className="fw-bold">Prix HT :</p>
-                  <p>52€</p>
-                </Col>
-                <Col className="d-flex justify-content-between">
-                  <p className="fw-bold">TVA :</p>
-                  <p>50€</p>
-                </Col>
-                <Col className="d-flex justify-content-between">
                   <p className="fw-bold">Prix TTC : </p>
                   <p>{totalCommand}€</p>
                 </Col>

@@ -13,19 +13,25 @@ export default function useAuthentification() {
   const setUser = useSetRecoilState(userState);
 
   const login = async (loginUser: LoginUser) => {
-    
     const response = await axios.post(`${apiUrl}/api/auth/local`, {
       identifier: loginUser.identifier,
       password: loginUser.password,
     });
 
-    localStorage.setItem('jwt', response.data.jwt);   
-    setUser({ token: response.data.jwt, isConnected: true });
+    localStorage.setItem("jwt", response.data.jwt);
+    setUser({
+      token: response.data.jwt,
+      isConnected: true,
+      username: response.data.username,
+      email: response.data.email, 
+      firstname: response.data.firstname, 
+      lastname: response.data.lastname
+    });
   };
 
   const logout = async () => {
     setUser({ token: "", isConnected: false });
-    localStorage.removeItem('jwt');
+    localStorage.removeItem("jwt");
   };
 
   return { login, logout };

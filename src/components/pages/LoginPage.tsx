@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
+import useAuthentification from "../../hooks/useAuthentification";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -17,6 +18,7 @@ export default function LoginPage() {
   const [waitingResponse, setWaitingResponse] = useState(false);
   const [login, setLogin] = useState<Login>({ identifier: "", password: "" });
   const setUser = useSetRecoilState(userState);
+  const { login: signIn } = useAuthentification();
 
   const navigate = useNavigate();
 
@@ -33,7 +35,9 @@ export default function LoginPage() {
         password: login.password,
       });
 
-      setUser({ token: response.data.jwt, isConnected: true });
+      // setUser({ token: response.data.jwt, isConnected: true });
+      signIn(login)
+
 
       // redirection vers la home
       navigate("/");

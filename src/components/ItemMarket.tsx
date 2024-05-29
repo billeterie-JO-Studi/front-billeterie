@@ -49,7 +49,7 @@ export default function ItemCardMarket(props: Readonly<Props>) {
           <Button className="btn btn-sm btn-dark" onClick={removeItem}>
             -
           </Button>
-          <input type="text" className="input-qty" value={item.quantity} />
+          <input type="text" className="input-qty" readOnly value={item.quantity} />
           <Button className="btn btn-sm btn-dark" onClick={addItem}>
             +
           </Button>

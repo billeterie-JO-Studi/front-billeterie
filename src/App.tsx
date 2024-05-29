@@ -1,22 +1,21 @@
-import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import "./App.css";
 import Root from "./components/layout/Root";
-import HomePage from "./components/pages/HomePage";
-import OffresPage from "./components/pages/OffresPage";
-import LoginPage from "./components/pages/LoginPage";
-import RegisterPage from "./components/pages/RegisterPage";
 import ErrorPage from "./components/pages/ErrorPage";
+import HomePage from "./components/pages/HomePage";
+import LoginPage from "./components/pages/LoginPage";
 import MarketPage from "./components/pages/MarketPage";
-import { useSetRecoilState } from "recoil";
-import axios from "axios";
-import { useEffect } from "react";
-import Offre from "./models/Offre";
-import OffreService from "./services/OffresService";
-import { offresState } from "./store/store";
+import OffresPage from "./components/pages/OffresPage";
+import RegisterPage from "./components/pages/RegisterPage";
+// import { userState } from "./store/store";
+import { useEffect, useRef } from "react";
 import ProfilePage from "./components/pages/ProfilePage";
 import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
+import useLoad from "./hooks/useLoad";
+import { marketState } from "./store/store";
 
-const urlApi = import.meta.env.VITE_API_URL;
+// const setUser = useSetRecoilState(userState);
 
 const router = createBrowserRouter([
   {
@@ -44,12 +43,12 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "profile", 
-        element: <ProfilePage />
+        path: "profile",
+        element: <ProfilePage />,
       },
       {
-        path: "purchase-history", 
-        element: <PurchaseHistoryPage />
+        path: "purchase-history",
+        element: <PurchaseHistoryPage />,
       },
       {
         path: "*",
@@ -60,27 +59,30 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
+  const isLoaded = useRef(false);
+  const panier = useRecoilValue(marketState);
+  const { loadOffre, loadPanier } = useLoad();
 
-  const setOffres = useSetRecoilState(offresState); 
+  useEffect(() => {
+    console.log("use Effect sauvegarde panier");
+    if (!isLoaded.current) {
+      console.log("abandon sauvegarde");
+      return;
+    }
+    console.log("sauvegarde panier");
+    localStorage.setItem("panier", JSON.stringify(panier));
+  }, [panier]);
 
   const init = async () => {
+    if (isLoaded.current) return;
     // récupération des offres
-    try {
-      const response = await axios.get(`${urlApi}/api/offres`);
-      console.log(response);
-      const listData: unknown[] = response.data.data;
-      
+    const listPromiseLoader = [];
+    listPromiseLoader.push(loadOffre());
+    listPromiseLoader.push(loadPanier());
 
-      const listOffre: Offre[] = [];
-      listData.forEach((data) => {
-        const newOffre: Offre = OffreService.createOffreFromDataApi(data);
-        listOffre.push(newOffre);
-      });
+    await Promise.all(listPromiseLoader);
 
-      setOffres(listOffre); 
-    } catch (err) {
-      console.log(err);
-    }
+    isLoaded.current = true;
   };
 
   useEffect(() => {

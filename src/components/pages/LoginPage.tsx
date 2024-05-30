@@ -1,13 +1,8 @@
 import { Button, Card, Form, Spinner, Container } from "react-bootstrap";
 import "./LoginPage.css";
 import { ChangeEvent, FormEvent, useState } from "react";
-import axios from "axios";
-import { useSetRecoilState } from "recoil";
-import { userState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import useAuthentification from "../../hooks/useAuthentification";
-
-const apiUrl = import.meta.env.VITE_API_URL;
 
 type Login = {
   identifier: string;
@@ -17,7 +12,6 @@ type Login = {
 export default function LoginPage() {
   const [waitingResponse, setWaitingResponse] = useState(false);
   const [login, setLogin] = useState<Login>({ identifier: "", password: "" });
-  const setUser = useSetRecoilState(userState);
   const { login: signIn } = useAuthentification();
 
   const navigate = useNavigate();
@@ -28,25 +22,17 @@ export default function LoginPage() {
 
     setWaitingResponse(true);
 
-    // demande API
     try {
-      const response: any = await axios.post(`${apiUrl}/api/auth/local`, {
-        identifier: login.identifier,
-        password: login.password,
-      });
-
-      // setUser({ token: response.data.jwt, isConnected: true });
-      signIn(login)
-
+      signIn(login);
 
       // redirection vers la home
       navigate("/");
     } catch (err) {
       console.error(err);
-      // TODO: informé le client
+      // TODO: informé le client, mieux que la ligne en dessous
+      alert("Erreur d'authentification");
     }
 
-    // fin de l'attente
     setWaitingResponse(false);
   };
 
@@ -59,7 +45,6 @@ export default function LoginPage() {
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     // TODO: controle de la force du mot de passe.
 
-    // mise a jour du state local
     setLogin({ ...login, password: e.target.value });
   };
   return (

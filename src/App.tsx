@@ -13,6 +13,7 @@ import ProfilePage from "./components/pages/ProfilePage";
 import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
 import useLoad from "./hooks/useLoad";
 import { marketState } from "./store/store";
+import DetailsCommand from "./components/pages/DetailsCommand";
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "ticket",
         element: <OffresPage />,
+      },
+      {
+        path: "details-command/:id",
+        element: <DetailsCommand />,
       },
       {
         path: "market",

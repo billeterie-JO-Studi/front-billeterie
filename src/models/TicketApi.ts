@@ -2,12 +2,12 @@ export default interface TicketApi {
   id: number;
   attributes: {
     key_qrcode: string;
-    command?: {
+    command: {
       data: {
         id: number;
       }
     }
-    offre?: {
+    offre: {
       data: {
         id: number;
       }

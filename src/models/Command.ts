@@ -4,9 +4,7 @@ export default interface Command {
   datePurchasse: Date;
   totalPrice: number;
   idUser: number; 
-  tickets: [
-    id: number
-  ]
+  tickets: number[]; 
 }
 
 

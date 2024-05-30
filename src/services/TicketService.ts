@@ -7,9 +7,7 @@ export default class TicketService {
       typeof data.id === "number" &&
       "attributes" in data &&
       typeof data.attributes.key_qrcode === "string" &&
-      "offre" in data.attributes &&
-      "command" in data.attributes
-
+      "offre" in data.attributes 
     ) {
       return true;
     }
@@ -22,7 +20,6 @@ export default class TicketService {
         id: dataApi.id,
         qrcode: dataApi.attributes.key_qrcode,
         idOffre: dataApi.attributes.offre.data.id,
-        idCommand: dataApi.attributes.command.data.id
       };
       return newTicket;
     }

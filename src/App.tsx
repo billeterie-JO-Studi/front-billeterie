@@ -8,13 +8,13 @@ import LoginPage from "./components/pages/LoginPage";
 import MarketPage from "./components/pages/MarketPage";
 import OffresPage from "./components/pages/OffresPage";
 import RegisterPage from "./components/pages/RegisterPage";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import ProfilePage from "./components/pages/ProfilePage";
 import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
 import useLoad from "./hooks/useLoad";
 import { marketState } from "./store/store";
 import DetailsCommand from "./components/pages/DetailsCommand";
-
+import PaymentSucess from "./components/pages/PaymentSucess";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <ErrorPage />,
+      },
+      {
+        path: "paiement-sucess",
+        element: <PaymentSucess />,
       },
     ],
   },

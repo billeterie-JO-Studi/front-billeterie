@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import QRCode from "qrcode-generator";
+import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -8,8 +9,7 @@ import Ticket from "../../models/Ticket";
 import Command from "../../models/Command";
 import TicketService from "../../services/TicketService";
 import OffreService from "../../services/OffresService";
-
-import CommandService from "../../services/CommandsService"
+import CommandService from "../../services/CommandsService";
 
 export default function DetailsCommand() {
   const api = useApi();
@@ -47,7 +47,7 @@ export default function DetailsCommand() {
   };
 
   // Génération du pdf
-  const generatePDF = (ticket: Ticket) => {
+  const generatePDF = (ticket: Ticket, command?: Command) => {
     const qr = generateQRCode(ticket);
 
     const pdf = new jsPDF({
@@ -58,14 +58,29 @@ export default function DetailsCommand() {
 
     const pdfHeight = pdf.internal.pageSize.getHeight();
     const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfBgImage = new Image();
+    pdfBgImage.src = "/src/assets/logo.png"
 
-    pdf.rect(5, 5, pdfWidth - 10, pdfHeight - 10);
     pdf
+      .setFillColor("#B7CCCB")
+      .rect(5, 5, pdfWidth - 10, pdfHeight - 10, "FD");
+    pdf
+      .addImage(
+        pdfBgImage,
+        "PNG",
+        7,
+        12,
+        pdfWidth/16,
+        pdfHeight/16,
+      )
       .setTextColor("#202020")
       .setFontSize(16)
-      .text("Votre Billet", 10, 30)
+      .text(`Votre Billet - ${ticket.offre?.name}`, pdfWidth/12, 30)
+      .line(10, 35, (pdfWidth / 2) - 10, 35 )
       .setFontSize(12)
-      .text(`${ticket.offre?.description} : ${ticket.offre?.price} €`, 10, 50)
+      .text(`REF: ${command?.reference}`, 10, 50)
+      .text(`ID Billet: ${ticket.id}`, 10, 70)
+      .text(`${ticket.offre?.description} : ${ticket.offre?.price} €`, 10, 90)
       .line(pdfWidth / 2, 10, pdfWidth / 2, pdfHeight - 10)
       .addImage(
         qr.createDataURL(),
@@ -74,13 +89,9 @@ export default function DetailsCommand() {
         pdfHeight / 4,
         pdfWidth / 3,
         pdfWidth / 3
-      );
-    const html = "";
-    pdf.html(html, {
-      callback: function (pdf) {
-        pdf.save("ticket.pdf");
-      },
-    });
+      )
+      
+    pdf.save('ticket.pdf')
   };
 
   useEffect(() => {
@@ -110,6 +121,7 @@ export default function DetailsCommand() {
             <th>Description</th>
             <th>Prix unitaire</th>
             <th>Le billet</th>
+            <th>QR Code</th>
           </tr>
         </thead>
         <tbody>
@@ -121,11 +133,14 @@ export default function DetailsCommand() {
               <td>{ticket.offre?.price} €</td>
               <td>
                 <button
-                  onClick={() => generatePDF(ticket)}
+                  onClick={() => generatePDF(ticket, command)}
                   className="p-2 bg-blue"
                 >
                   Télécharger le billet
                 </button>
+              </td>
+              <td>
+                <QRCodeSVG value={`${ticket.id}_${ticket.offre?.id}_${ticket.qrcode}`}/>
               </td>
             </tr>
           ))}

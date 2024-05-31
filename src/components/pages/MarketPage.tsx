@@ -21,9 +21,10 @@ export default function MarketPage() {
   const onClickPay = async () => {
     // logs
     try {
-      const dataApi = listMarket.map((item) => {
-        return { offre: item.offre.id, quantity: item.quantity };
-      });
+      const dataApi = listMarket
+      .filter(item => item.quantity > 0)
+      .map((item) => {return { offre: item.offre.id, quantity: item.quantity };});
+
       const response = await axios.post(`${urlApi}/api/checkout`, dataApi, {
         headers: {
           Authorization: `Bearer ${user.token}`,

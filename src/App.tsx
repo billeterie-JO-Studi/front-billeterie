@@ -8,7 +8,7 @@ import LoginPage from "./components/pages/LoginPage";
 import MarketPage from "./components/pages/MarketPage";
 import OffresPage from "./components/pages/OffresPage";
 import RegisterPage from "./components/pages/RegisterPage";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ProfilePage from "./components/pages/ProfilePage";
 import PurchaseHistoryPage from "./components/pages/PurchaseHistoryPage";
 import useLoad from "./hooks/useLoad";

@@ -27,8 +27,9 @@ export default function LoginPage() {
       if (succesAuthentification) {
         // redirection vers la home
         navigate("/");
+      } else {
+        alert("Erreur d'authentification");
       }
-      alert("Erreur d'authentification"); 
     } catch (err) {
       console.error(err);
       // TODO: informé le client, mieux que la ligne en dessous

@@ -15,10 +15,16 @@ export default function ProfilePage() {
 
   const getCommand = async () => {
     const responseApi = await api.get(
-      "/commands?populate=*"
+      "/commands", {
+        params: {
+          populate: "*", 
+          filters: {
+            user: user.id
+          }
+        }
+      }
     );
     const listaDataCommandApi: unknown[] = responseApi.data.data; 
-    // console.log(listaDataCommandApi);
     const commandLoaded: Command[] = listaDataCommandApi.map(item => CommandService.createCommandFromDataApi(item)); 
     setCommands(commandLoaded)
     console.log(commandLoaded);
@@ -26,10 +32,13 @@ export default function ProfilePage() {
   
   
   useEffect(() => {
+    console.log(user);
+    
     // Init
+    if (!user.isConnected) return;
     getCommand();
     
-  }, [])
+  }, [user])
   
   useEffect(() => {
     // problème que le init  est pas terminé quand le code est lancé. les enfants sont prioritaire pour les useEffect

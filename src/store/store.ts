@@ -21,8 +21,8 @@ export const marketState = atom<ItemMarket[]>({
   default: [],
 });
 
-// Selector
 
+// Selector
 export const totalCommandSelector = selector({
   key: "totalCommandSelector",
   get: ({ get }) => {
@@ -46,3 +46,5 @@ export const totalTicketSelector = selector({
     return totalTicket;
   },
 });
+
+

@@ -18,15 +18,17 @@ export default function useAuthentification() {
         identifier: loginUser.identifier,
         password: loginUser.password,
       });
-  
+      console.log("response API AUTH ==> ", response);
+      
       localStorage.setItem("jwt", response.data.jwt);
       setUser({
         token: response.data.jwt,
+        id: response.data.user.id,
         isConnected: true,
-        username: response.data.username,
-        email: response.data.email, 
-        firstname: response.data.firstname, 
-        lastname: response.data.lastname
+        username: response.data.user.username,
+        email: response.data.user.email, 
+        firstname: response.data.user.firstname, 
+        lastname: response.data.user.lastname
       });
   
       return true;

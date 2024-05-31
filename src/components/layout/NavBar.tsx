@@ -25,6 +25,7 @@ export default function NavBarJO() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            { isConnected && <NavLink to="/profile" className="mx-lg-3 mb-2 mb-lg-0" >Profil </NavLink>}
             <NavLink to="/ticket" className="mx-lg-3 mb-2 mb-lg-0">Billeterie</NavLink>
             <NavLink to="/market" className="mx-lg-3 mb-2 mb-lg-0"><i className="bi-cart me-1" /> Panier</NavLink>
             { !isConnected && <NavLink to="/login" className="mx-lg-3 mb-2 mb-lg-0">Connexion</NavLink>}

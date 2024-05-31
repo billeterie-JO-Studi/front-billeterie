@@ -4,6 +4,7 @@ import CommandApi from "../models/CommandApi";
 export default class CommandService {
 
   static isCommand(data: any): data is CommandApi {
+
     if (
       typeof data.id === "number" &&
       "attributes" in data &&

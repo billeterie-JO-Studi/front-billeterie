@@ -67,12 +67,9 @@ export default function App() {
   const { loadOffre, loadPanier, loadUser } = useLoad();
 
   useEffect(() => {
-    console.log("use Effect sauvegarde panier");
     if (!isLoaded.current) {
-      console.log("abandon sauvegarde");
       return;
     }
-    console.log("sauvegarde panier");
     localStorage.setItem("panier", JSON.stringify(panier));
   }, [panier]);
 

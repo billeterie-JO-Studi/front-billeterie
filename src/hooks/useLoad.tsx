@@ -5,6 +5,8 @@ import OffreService from "../services/OffresService";
 import { marketState, offresState, userState } from "../store/store";
 import useApi from "./useApi";
 import User from "../models/User";
+import CommandService from "../services/CommandsService";
+import CommandType from "../models/Command";
 
 export default function useLoad() {
   const urlApi = import.meta.env.VITE_API_URL;
@@ -60,7 +62,18 @@ export default function useLoad() {
     setUser(userLoaded); 
   };
 
+  //chargement des commandes du user connecté
+  const loadCommands = async () => {
+    const responseAPi = await api.get(`/users/me?populate=commands`);
+    try {
+      const commandsData: CommandType = CommandService.createCommandFromDataApi(data);
+      if (commandsData) {
+        return commandsData;
+      }
+    } catch (error) {}
+  }
 
 
-  return { loadOffre, loadPanier, loadUser };
+
+  return { loadOffre, loadPanier, loadUser, loadCommands };
 }

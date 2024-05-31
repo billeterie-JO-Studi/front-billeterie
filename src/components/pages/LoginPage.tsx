@@ -23,10 +23,12 @@ export default function LoginPage() {
     setWaitingResponse(true);
 
     try {
-      signIn(login);
-
-      // redirection vers la home
-      navigate("/");
+      const succesAuthentification = await signIn(login);
+      if (succesAuthentification) {
+        // redirection vers la home
+        navigate("/");
+      }
+      alert("Erreur d'authentification"); 
     } catch (err) {
       console.error(err);
       // TODO: informé le client, mieux que la ligne en dessous

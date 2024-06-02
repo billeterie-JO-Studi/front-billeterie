@@ -21,6 +21,11 @@ export const marketState = atom<ItemMarket[]>({
   default: [],
 });
 
+export const redirectAfterLoginState = atom<string>({
+  key: "redirectAfterLoginState", 
+  default: "/"
+})
+
 
 // Selector
 export const totalCommandSelector = selector({

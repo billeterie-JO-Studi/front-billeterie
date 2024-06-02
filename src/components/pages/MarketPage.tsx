@@ -1,7 +1,8 @@
 import { Col, Row, Container } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   marketState,
+  redirectAfterLoginState,
   totalCommandSelector,
   totalTicketSelector,
   userState,
@@ -9,6 +10,7 @@ import {
 import ItemCardMarket from "../ItemMarket";
 import "./MarketPage.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -17,13 +19,22 @@ export default function MarketPage() {
   const totalCommand = useRecoilValue(totalCommandSelector);
   const totalTicket = useRecoilValue(totalTicketSelector);
   const user = useRecoilValue(userState);
+  const navigate = useNavigate();
+  const setRedirectAfterLogin = useSetRecoilState(redirectAfterLoginState);
 
   const onClickPay = async () => {
-    // logs
+    if (!user.isConnected) {
+      setRedirectAfterLogin("/market");
+      navigate("/login");
+      return;
+    }
+
     try {
       const dataApi = listMarket
-      .filter(item => item.quantity > 0)
-      .map((item) => {return { offre: item.offre.id, quantity: item.quantity };});
+        .filter((item) => item.quantity > 0)
+        .map((item) => {
+          return { offre: item.offre.id, quantity: item.quantity };
+        });
 
       const response = await axios.post(`${urlApi}/api/checkout`, dataApi, {
         headers: {
@@ -34,6 +45,7 @@ export default function MarketPage() {
       document.location = response.data;
     } catch (err) {
       //TODO: faire le traitement d'erreur en cas d'erreur
+      alert("Erreur au moment de l'envoi de la commande");
     }
   };
 

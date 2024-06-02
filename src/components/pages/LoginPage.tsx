@@ -1,8 +1,10 @@
 import { Button, Card, Form, Spinner, Container } from "react-bootstrap";
 import "./LoginPage.css";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 import useAuthentification from "../../hooks/useAuthentification";
+import { useRecoilValue } from "recoil";
+import { redirectAfterLoginState } from "../../store/store";
 
 type Login = {
   identifier: string;
@@ -13,6 +15,7 @@ export default function LoginPage() {
   const [waitingResponse, setWaitingResponse] = useState(false);
   const [login, setLogin] = useState<Login>({ identifier: "", password: "" });
   const { login: signIn } = useAuthentification();
+  const redirectAfterLogin = useRecoilValue(redirectAfterLoginState)
 
   const navigate = useNavigate();
 
@@ -25,8 +28,8 @@ export default function LoginPage() {
     try {
       const succesAuthentification = await signIn(login);
       if (succesAuthentification) {
-        // redirection vers la home
-        navigate("/");
+        // redirection après login
+        navigate(redirectAfterLogin);
       } else {
         alert("Erreur d'authentification");
       }
@@ -89,9 +92,10 @@ export default function LoginPage() {
               <span>Connexion</span>
             )}
           </Button>
-        </Form>
+        </Form> 
       </Card>
-      {waitingResponse ? "Pause Café" : "Au boulot"}
+      
+      <Link to="/register">Inscription</Link>
     </Container>
   );
 }

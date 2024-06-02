@@ -10,6 +10,7 @@ import Command from "../../models/Command";
 import TicketService from "../../services/TicketService";
 import OffreService from "../../services/OffresService";
 import CommandService from "../../services/CommandsService";
+import logoSite from "../../assets/logo.png"
 
 export default function DetailsCommand() {
   const api = useApi();
@@ -58,15 +59,12 @@ export default function DetailsCommand() {
 
     const pdfHeight = pdf.internal.pageSize.getHeight();
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfBgImage = new Image();
-    pdfBgImage.src = "/src/assets/logo.png"
 
     pdf
       .setFillColor("#B7CCCB")
-      .rect(5, 5, pdfWidth - 10, pdfHeight - 10, "FD");
-    pdf
+      .rect(5, 5, pdfWidth - 10, pdfHeight - 10, "FD")
       .addImage(
-        pdfBgImage,
+        logoSite,
         "PNG",
         7,
         12,
